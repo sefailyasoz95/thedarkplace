@@ -15,7 +15,7 @@ const Navbar = () => {
 					<small className='text-xs text-gray-400'>Share your thoughts anonymously</small>
 				</div> */}
 				<Link href={"/"} className='text-2xl font-semibold'>
-					The Dark Place
+					TheDarkPlace
 				</Link>
 				<div className='h-1 w-0 group-hover:w-full transition-all bg-red-600'></div>
 			</div>
