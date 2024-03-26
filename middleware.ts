@@ -56,6 +56,8 @@ export async function middleware(request: NextRequest) {
 
 	const { data } = await supabase.auth.getUser();
 	/* protectec route */
+	console.log("data:", data);
+
 	if (data.user) {
 	} else {
 		return NextResponse.redirect(new URL("/", request.url));
