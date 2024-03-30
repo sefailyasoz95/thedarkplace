@@ -18,12 +18,10 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	const accessToken = undefined;
-
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body className={inter.className}>
-				<ThemeProvider attribute='class' defaultTheme='dark' disableTransitionOnChange forcedTheme='dark'>
+			<body className={`${inter.className}`}>
+				<ThemeProvider attribute='class' defaultTheme='dark' forcedTheme='dark'>
 					<main className='max-w-7xl mx-auto p-10 space-y-5'>
 						<Navbar />
 						{children}

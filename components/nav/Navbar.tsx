@@ -7,9 +7,10 @@ import Profile from "./Profile";
 
 const Navbar = () => {
 	const user = useUser((state) => state.user);
+	console.log("user: ", user);
 
 	return (
-		<nav className='flex items-center justify-between'>
+		<nav className={`${user?.id ? "flex items-center justify-between" : "hidden"}`}>
 			<div className='group'>
 				{/* <div className='flex flex-col items-center cursor-pointer'>
 					<small className='text-xs text-gray-400'>Share your thoughts anonymously</small>
@@ -19,7 +20,7 @@ const Navbar = () => {
 				</Link>
 				<div className='h-1 w-0 group-hover:w-full transition-all bg-red-600'></div>
 			</div>
-			{user ? <Profile /> : <LoginForm />}
+			{user?.id ? <Profile /> : <LoginForm />}
 		</nav>
 	);
 };

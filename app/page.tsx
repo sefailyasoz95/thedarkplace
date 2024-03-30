@@ -2,24 +2,42 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { useUser } from "@/lib/store/user";
+import { useIsFetching } from "@/lib/store/isFetching";
 
-export default async function Home() {
+export default function Home() {
+	const user = useUser((state) => state.user);
+	const isFetching = useIsFetching((state) => state.isFetching);
+
 	return (
-		<LampContainer>
-			<motion.h1
-				initial={{ opacity: 0.5, y: 100 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				transition={{
-					delay: 0.3,
-					duration: 0.8,
-					ease: "easeInOut",
-				}}
-				className='mt-8 bg-gradient-to-br from-white to-red-700 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl'>
-				{/* A place for people who are not comfortable with sharing their thoughts online because what other people would
+		<React.Fragment>
+			{isFetching ? (
+				<div className='h-screen flex items-center justify-center'>
+					<span className='animate-bounce text-2xl font-semibold'>Loading...</span>
+				</div>
+			) : user?.id ? (
+				<div>show list</div>
+			) : (
+				<LampContainer>
+					<motion.h1
+						initial={{ opacity: 0.5, y: 100 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{
+							delay: 0.3,
+							duration: 0.8,
+							ease: "easeInOut",
+						}}
+						className='mt-8 bg-gradient-to-br from-white to-black py-4 bg-clip-text flex flex-col items-center text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl'>
+						{/* A place for people who are not comfortable with sharing their thoughts online because what other people would
 				think and have no one to talk about their problems, because they are lonely. */}
-				The Dark Place, share your thoughts anonymously.
-			</motion.h1>
-		</LampContainer>
+						<span>The Dark Place, share your thoughts anonymously.</span>
+						<button className='inline-flex h-12 mt-10 animate-shimmer text-lg items-center justify-center rounded-xl border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#4f5a6e,55%,#000103)] bg-[length:200%_100%] w-fit px-10 font-medium text-white transition-colors focus:outline-none'>
+							Get Started
+						</button>
+					</motion.h1>
+				</LampContainer>
+			)}
+		</React.Fragment>
 	);
 }
 
@@ -27,7 +45,7 @@ export const LampContainer = ({ children, className }: { children: React.ReactNo
 	return (
 		<div
 			className={cn(
-				"relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black w-full rounded-md z-0",
+				"relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black w-full rounded-md z-0 ",
 				className
 			)}>
 			<div className='relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 '>
